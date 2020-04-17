@@ -12,13 +12,10 @@ int main()
 
 	Mat inversedMat = 255 - srcMat;
 	threshold(inversedMat, binaryMat, 150, 255, THRESH_OTSU);
-
 	Mat element = getStructuringElement(MORPH_RECT, Size(13, 13));
 	morphologyEx(binaryMat, binaryMat, MORPH_OPEN, element);
-
 	vector<vector<Point>> contours;
 	findContours(binaryMat, contours, RETR_EXTERNAL, CHAIN_APPROX_NONE);
-
 	float rate[100];
 	for (int i = 0; i < contours.size(); i++)
 	{
@@ -27,6 +24,10 @@ int main()
 		rect.points(vtx);
 
 		float Y = sqrt((vtx[0].y - vtx[1].y) * (vtx[0].y - vtx[1].y) + (vtx[0].x - vtx[1].x) * (vtx[0].x - vtx[1].x));
+
+
+
+
 		float X = sqrt((vtx[1].y - vtx[2].y) * (vtx[1].y - vtx[2].y) + (vtx[1].x - vtx[2].x) * (vtx[1].x - vtx[2].x));
 		rate[i] = X / Y;
 
